@@ -101,8 +101,41 @@ object hurlingham{
 
 
 object moto{
-    method rapido() = true
-    method puedeFuncionar() = not moto.rapido()
+    method rapido() = false
+    method puedeFuncionar() = not self.rapido()
     method desgaste() { }
     method patenteValida() = false
+}
+
+object centroInscripcion {
+    var vehiculos= [moto, chatarra]
+    const cochesInscriptos = []
+    const cochesRechazados = []
+    var lugarCarrera= paris
+    method inscripciones() { vehiculos.forEach({v=> self.inscribirCoche(v)})}
+    method inscribirCoche(coche) {
+        if(lugarCarrera.puedeLlegar(coche))
+            cochesInscriptos.add(coche)
+        else
+            cochesRechazados.add(coche)
+    }
+    method inscriptos() = cochesInscriptos
+    method rechazados() = cochesRechazados
+    
+    method vehiculos() = vehiculos
+    method agregarVehiculo(nuevo) = vehiculos.add(nuevo)
+    method replanificarCarrera(lugar) {
+        lugarCarrera= lugar
+        cochesInscriptos.clear()
+        cochesRechazados.clear()
+        self.inscripciones()
+    }
+
+    method cantidadInscriptos() {
+        return cochesInscriptos.size()
+    }
+
+    method correr() {
+        cochesInscriptos.forEach({c=>c.desgaste()})
+    }
 }

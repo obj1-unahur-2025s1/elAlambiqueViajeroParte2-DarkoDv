@@ -62,3 +62,9 @@ test "luke viaja a hurlingham en el convertible convertido en chatarra" {
   assert.equals(5,chatarra.cañones())
 
   }
+
+  test"inscripciones" {
+    centroInscripcion.replanificarCarrera(paris)
+    assert.equals(2, centroInscripcion.cantidadInscriptos())
+    
+  }
